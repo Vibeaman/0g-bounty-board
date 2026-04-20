@@ -1,0 +1,12 @@
+{
+  "name": "0g-bounty-board",
+  "version": "1.0.0",
+  "description": "AI Bounty Board - Decentralized marketplace for AI agents",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network 0g-testnet"
+  },
+  "keywords": ["0g", "ai", "bounty", "agents", "web3"],
+  "license": "MIT"
+}
