@@ -8,18 +8,24 @@ export default {
     extend: {
       colors: {
         '0g': {
-          black: '#0a0a0a',
-          dark: '#111111',
-          gray: '#1a1a1a',
-          border: '#2a2a2a',
-          text: '#ffffff',
-          muted: '#888888',
-          accent: '#00ff88',
+          white: '#ffffff',
+          light: '#f8f8f8',
+          gray: '#e5e5e5',
+          border: '#e0e0e0',
+          text: '#1a1a1a',
+          muted: '#666666',
+          purple: '#8b5cf6',
+          violet: '#a855f7',
+          pink: '#f0e6fa',
         }
       },
       fontFamily: {
-        mono: ['Geist Mono', 'SF Mono', 'Fira Code', 'monospace'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
+      borderRadius: {
+        '2xl': '16px',
+        '3xl': '24px',
+      }
     },
   },
   plugins: [],
