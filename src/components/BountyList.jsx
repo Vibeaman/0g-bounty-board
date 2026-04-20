@@ -1,13 +1,13 @@
-import { Clock, User, Coins, FileText, Image, Mic, Code, Globe, Database, HelpCircle } from 'lucide-react'
+import { Clock, User, ArrowUpRight } from 'lucide-react'
 
 const BOUNTY_TYPES = {
-  0: { label: 'Text', icon: FileText, class: 'badge-text' },
-  1: { label: 'Image', icon: Image, class: 'badge-image' },
-  2: { label: 'Transcription', icon: Mic, class: 'badge-transcription' },
-  3: { label: 'Code', icon: Code, class: 'badge-code' },
-  4: { label: 'Translation', icon: Globe, class: 'badge-translation' },
-  5: { label: 'Data', icon: Database, class: 'badge-data' },
-  6: { label: 'Other', icon: HelpCircle, class: 'badge-other' },
+  0: { label: 'Text', class: 'badge-text' },
+  1: { label: 'Image', class: 'badge-image' },
+  2: { label: 'Audio', class: 'badge-transcription' },
+  3: { label: 'Code', class: 'badge-code' },
+  4: { label: 'Translation', class: 'badge-translation' },
+  5: { label: 'Data', class: 'badge-data' },
+  6: { label: 'Other', class: 'badge-other' },
 }
 
 const STATUS_CLASSES = {
@@ -21,12 +21,12 @@ const STATUS_CLASSES = {
 const STATUS_LABELS = {
   0: 'Open',
   1: 'In Progress',
-  2: 'Under Review',
-  3: 'Completed',
+  2: 'Review',
+  3: 'Done',
   4: 'Cancelled',
 }
 
-// Mock data for demo
+// Mock data
 const MOCK_BOUNTIES = [
   {
     id: 1,
@@ -36,7 +36,6 @@ const MOCK_BOUNTIES = [
     status: 0,
     deadline: Date.now() + 86400000 * 3,
     title: 'Write product descriptions for 10 items',
-    description: 'Need compelling product descriptions for an e-commerce store. Each description should be 100-150 words.',
   },
   {
     id: 2,
@@ -46,7 +45,6 @@ const MOCK_BOUNTIES = [
     status: 0,
     deadline: Date.now() + 86400000 * 5,
     title: 'Generate logo concepts for AI startup',
-    description: 'Create 5 unique logo concepts for an AI infrastructure company. Modern, minimalist style preferred.',
   },
   {
     id: 3,
@@ -56,7 +54,6 @@ const MOCK_BOUNTIES = [
     status: 1,
     deadline: Date.now() + 86400000 * 2,
     title: 'Transcribe 30-minute podcast episode',
-    description: 'Accurate transcription with speaker labels. English language, clear audio quality.',
   },
   {
     id: 4,
@@ -66,17 +63,15 @@ const MOCK_BOUNTIES = [
     status: 2,
     deadline: Date.now() + 86400000,
     title: 'Review smart contract for vulnerabilities',
-    description: 'Security audit of ERC-20 token contract. Check for reentrancy, overflow, and access control issues.',
   },
   {
     id: 5,
     poster: '0xAbCdEf1234567890AbCdEf1234567890AbCdEf12',
     reward: '0.3',
     bountyType: 4,
-    status: 3,
-    deadline: Date.now() - 86400000,
+    status: 0,
+    deadline: Date.now() + 86400000 * 4,
     title: 'Translate whitepaper to Spanish',
-    description: 'Professional translation of 5000-word technical document. Must maintain technical accuracy.',
   },
   {
     id: 6,
@@ -86,54 +81,50 @@ const MOCK_BOUNTIES = [
     status: 0,
     deadline: Date.now() + 86400000 * 7,
     title: 'Analyze DeFi protocol metrics',
-    description: 'Compile TVL, volume, and user growth data for top 20 DeFi protocols. Weekly report format.',
   },
 ]
 
 function BountyCard({ bounty }) {
   const type = BOUNTY_TYPES[bounty.bountyType]
-  const TypeIcon = type.icon
   const timeLeft = bounty.deadline - Date.now()
   const daysLeft = Math.max(0, Math.ceil(timeLeft / 86400000))
 
   return (
-    <div className="glass-card p-6 hover:shadow-0g transition-all duration-300 cursor-pointer">
+    <div className="card-0g p-6 hover:border-0g-muted/50 transition-all cursor-pointer group">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div className={`badge ${type.class}`}>
-          <TypeIcon className="w-3 h-3" />
+      <div className="flex items-center justify-between mb-4">
+        <span className={`badge ${type.class}`}>
           {type.label}
-        </div>
-        <div className={`badge ${STATUS_CLASSES[bounty.status]}`}>
+        </span>
+        <span className={`badge ${STATUS_CLASSES[bounty.status]}`}>
           {STATUS_LABELS[bounty.status]}
-        </div>
+        </span>
       </div>
 
-      {/* Title & Description */}
-      <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2">
+      {/* Title */}
+      <h3 className="text-white font-medium mb-4 leading-snug group-hover:text-0g-accent transition-colors">
         {bounty.title}
       </h3>
-      <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-        {bounty.description}
-      </p>
+
+      {/* Divider */}
+      <div className="divider my-4" />
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-4 border-t border-0g-700/20">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 text-sm">
-            <Coins className="w-4 h-4 text-0g-400" />
-            <span className="font-semibold text-white">{bounty.reward}</span>
-            <span className="text-gray-500">0G</span>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <div>
+            <div className="text-0g-accent font-medium">{bounty.reward} 0G</div>
+            <div className="text-0g-muted text-xs uppercase tracking-wider">Reward</div>
           </div>
-          <div className="flex items-center gap-1.5 text-sm text-gray-400">
-            <Clock className="w-4 h-4" />
-            {bounty.status === 3 ? 'Completed' : `${daysLeft}d left`}
+          <div>
+            <div className="text-white font-medium flex items-center gap-1">
+              <Clock size={12} />
+              {daysLeft}d
+            </div>
+            <div className="text-0g-muted text-xs uppercase tracking-wider">Left</div>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 text-sm text-gray-500">
-          <User className="w-4 h-4" />
-          {bounty.poster.slice(0, 6)}...{bounty.poster.slice(-4)}
-        </div>
+        <ArrowUpRight size={16} className="text-0g-muted group-hover:text-0g-accent transition-colors" />
       </div>
     </div>
   )
@@ -141,31 +132,30 @@ function BountyCard({ bounty }) {
 
 export default function BountyList() {
   return (
-    <section id="bounties" className="py-16 px-4">
+    <section id="bounties" className="py-24 px-6 lg:px-8 border-t border-0g-border">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-2">Active Bounties</h2>
-            <p className="text-gray-400">Browse and claim bounties to start earning</p>
+            <p className="section-title">Available Tasks</p>
+            <h2 className="text-3xl font-medium text-white">Active Bounties</h2>
           </div>
           
           {/* Filters */}
           <div className="flex items-center gap-3">
-            <select className="input-0g py-2 px-4 text-sm w-40">
+            <select className="input-0g py-2 px-4 text-sm w-36">
               <option value="">All Types</option>
               <option value="0">Text</option>
               <option value="1">Image</option>
-              <option value="2">Transcription</option>
+              <option value="2">Audio</option>
               <option value="3">Code</option>
               <option value="4">Translation</option>
               <option value="5">Data</option>
             </select>
-            <select className="input-0g py-2 px-4 text-sm w-40">
+            <select className="input-0g py-2 px-4 text-sm w-36">
               <option value="">All Status</option>
               <option value="0">Open</option>
               <option value="1">In Progress</option>
-              <option value="2">Under Review</option>
             </select>
           </div>
         </div>
@@ -178,9 +168,9 @@ export default function BountyList() {
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-10">
-          <button className="btn-secondary">
-            Load More Bounties
+        <div className="text-center mt-12">
+          <button className="btn-secondary-0g">
+            Load More
           </button>
         </div>
       </div>

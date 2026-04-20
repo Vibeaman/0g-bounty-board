@@ -2,177 +2,224 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 0G Fonts - Geist Mono */
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://cdn.prod.website-files.com/680b884d38733122a923739b/680b884d38733122a92373b4_GeistMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://cdn.prod.website-files.com/680b884d38733122a923739b/680b884d38733122a92373b3_GeistMono-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --0g-purple: #8b5cf6;
-  --0g-dark: #0f0a1f;
-  --0g-card: rgba(139, 92, 246, 0.1);
+  --0g-black: #0a0a0a;
+  --0g-dark: #111111;
+  --0g-gray: #1a1a1a;
+  --0g-border: #2a2a2a;
+  --0g-text: #ffffff;
+  --0g-text-muted: #888888;
+  --0g-accent: #00ff88;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0a1f 0%, #1a0f2e 50%, #0f0a1f 100%);
-  color: #f8fafc;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--0g-black);
+  color: var(--0g-text);
+  font-family: 'Geist Mono', 'SF Mono', 'Fira Code', monospace;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Glassmorphism card */
-.glass-card {
-  background: rgba(139, 92, 246, 0.08);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  border-radius: 16px;
+/* 0G Style Cards - Sharp corners, subtle borders */
+.card-0g {
+  background: var(--0g-dark);
+  border: 1px solid var(--0g-border);
+  border-radius: 0;
 }
 
-.glass-card:hover {
-  background: rgba(139, 92, 246, 0.12);
-  border-color: rgba(139, 92, 246, 0.3);
+.card-0g:hover {
+  border-color: #3a3a3a;
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #c084fc 0%, #8b5cf6 50%, #6366f1 100%);
+/* Green accent gradient like 0G */
+.gradient-text-0g {
+  background: linear-gradient(90deg, #00ff88 0%, #00ccff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Purple glow button */
-.btn-0g {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-  color: white;
+/* Primary button - 0G style */
+.btn-primary-0g {
+  background: var(--0g-text);
+  color: var(--0g-black);
   padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  font-family: 'Geist Mono', monospace;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   border: none;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.btn-0g:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
-}
-
-.btn-0g:active {
-  transform: translateY(0);
+.btn-primary-0g:hover {
+  background: var(--0g-accent);
+  color: var(--0g-black);
 }
 
 /* Secondary button */
-.btn-secondary {
-  background: rgba(139, 92, 246, 0.15);
-  color: #c084fc;
+.btn-secondary-0g {
+  background: transparent;
+  color: var(--0g-text);
   padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  font-family: 'Geist Mono', monospace;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--0g-border);
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.btn-secondary:hover {
-  background: rgba(139, 92, 246, 0.25);
-  border-color: rgba(139, 92, 246, 0.5);
+.btn-secondary-0g:hover {
+  border-color: var(--0g-text);
 }
 
-/* Input styles */
+/* Input fields */
 .input-0g {
-  background: rgba(15, 10, 31, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: 12px;
+  background: var(--0g-dark);
+  border: 1px solid var(--0g-border);
+  color: var(--0g-text);
   padding: 12px 16px;
-  color: white;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
   width: 100%;
+  transition: border-color 0.2s ease;
 }
 
 .input-0g:focus {
   outline: none;
-  border-color: #8b5cf6;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+  border-color: var(--0g-accent);
 }
 
 .input-0g::placeholder {
-  color: #64748b;
+  color: var(--0g-text-muted);
 }
 
-/* Bounty type badges */
+/* Stats styling */
+.stat-value {
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.stat-label {
+  color: var(--0g-text-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+}
+
+/* Badge styles - minimal */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+  padding: 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid;
 }
 
-.badge-text { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-.badge-image { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
-.badge-transcription { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
-.badge-code { background: rgba(96, 165, 250, 0.2); color: #60a5fa; }
-.badge-translation { background: rgba(167, 139, 250, 0.2); color: #a78bfa; }
-.badge-data { background: rgba(45, 212, 191, 0.2); color: #2dd4bf; }
-.badge-other { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
+.badge-text { border-color: #00ff88; color: #00ff88; }
+.badge-image { border-color: #ff6b9d; color: #ff6b9d; }
+.badge-transcription { border-color: #ffa64d; color: #ffa64d; }
+.badge-code { border-color: #4da6ff; color: #4da6ff; }
+.badge-translation { border-color: #b366ff; color: #b366ff; }
+.badge-data { border-color: #00d4aa; color: #00d4aa; }
+.badge-other { border-color: #888888; color: #888888; }
 
 /* Status badges */
-.status-open { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-.status-progress { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
-.status-review { background: rgba(96, 165, 250, 0.2); color: #60a5fa; }
-.status-completed { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
-.status-cancelled { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+.status-open { border-color: #00ff88; color: #00ff88; }
+.status-progress { border-color: #ffd700; color: #ffd700; }
+.status-review { border-color: #4da6ff; color: #4da6ff; }
+.status-completed { border-color: #888888; color: #888888; }
+.status-cancelled { border-color: #ff4444; color: #ff4444; }
 
-/* Stats grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
+/* Section headers */
+.section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--0g-text-muted);
+  margin-bottom: 24px;
 }
 
-.stat-card {
-  text-align: center;
-  padding: 24px;
+/* Large display text */
+.display-text {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-.stat-value {
-  font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #c084fc 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--0g-border);
+  width: 100%;
 }
 
-.stat-label {
-  color: #94a3b8;
-  font-size: 14px;
-  margin-top: 8px;
+/* Grid lines effect */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 10, 31, 0.5);
+  background: var(--0g-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.3);
-  border-radius: 4px;
+  background: var(--0g-border);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 92, 246, 0.5);
+  background: #3a3a3a;
 }
 
-/* Animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+/* Marquee animation for partners */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
